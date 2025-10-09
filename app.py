@@ -40,3 +40,19 @@ if a:
     print("a is true")
 else:
     print("a is false")
+
+def multiply_by_three(val):
+    return val * 3
+
+print(type(None))
+
+class Cat:
+    def __init__(self, name):
+        self.name = name
+        self.paws = 4
+
+    def speak(self):
+        print(self.name + " says meow")
+
+my_cat = Cat("Fuzzlekins")
+print(my_cat.speak())
