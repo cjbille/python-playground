@@ -115,6 +115,6 @@ class Person:
 
 person1 = Person("Chris", 34, "IT")
 print(person1.name)
-print(person1.get_years_in_biz()) # self is inferred from the object call
+print(person1.get_years_in_biz()) # self is inferred from the object call (refers to person1)
 print(Person.company)
 print(Person.get_years_in_biz(person1)) # need to pass in an object here
