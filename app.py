@@ -19,9 +19,9 @@ import math
 from decimal import Decimal, getcontext
 
 print("hello world")
-name = "chris"
+first_name = "chris"
 one = 1
-print(type(name))
+print(type(first_name))
 print(type(one))
 someDictionary = { "key1": "value1", "key2": "value2" }
 print(type(someDictionary))
@@ -66,11 +66,11 @@ print(round(14/3, 2))
 getcontext().prec = 3
 print(Decimal(1) / Decimal(3))
 
-name = "my name is fuzzlekins"
-print(name[0])
-print(name[:7])
-print(name[5:])
-print(len(name))
+cat_name = "my name is fuzzlekins"
+print(cat_name[0])
+print(cat_name[:7])
+print(cat_name[5:])
+print(len(cat_name))
 print(f'number is {4}') # prior to python 3.6, you had use string.format()
 print('Pi is {}'.format(math.pi))
 
@@ -80,3 +80,41 @@ print(bytes('😃', 'utf-8').decode('utf-8'))
 
 mylist = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 print([2*item for item in mylist]) # list comprehension
+
+def perform_op(num1, num2, op):
+    if op == 'sum':
+        return num1 + num2
+    if op == 'multiply':
+        return num1 * num2
+
+print(perform_op(1, 2, 'multiply')) # keyword args must come after positional args, and can be in any order
+print(perform_op(op='sum', num2=3, num1=4))
+
+def many_args(*args): # can use an asterisk for 1 or more args for positional arguments (not keyword args)
+    return args # this is a tuple
+
+print(many_args(1, 2, 3))
+
+def key_word_args(**kwargs): # use for keyword args
+    return kwargs # this is a dictionary
+
+print(key_word_args(key='val', anotherkey='anotherVal'))
+
+print((lambda x: x + 3)(5))
+
+class Person:
+    company = "Best IT Services" # this is a static variable
+    _years_in_biz = 19 # this is a private static variable
+    def __init__(self, name, age, dept):
+        self.name = name
+        self.age = age
+        self.dept = dept
+
+    def get_years_in_biz(self):
+        return self._years_in_biz
+
+person1 = Person("Chris", 34, "IT")
+print(person1.name)
+print(person1.get_years_in_biz()) # self is inferred from the object call
+print(Person.company)
+print(Person.get_years_in_biz(person1)) # need to pass in an object here
