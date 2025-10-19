@@ -15,7 +15,7 @@
 #
 # code begins here #
 #
-import math
+import math, time, threading
 from decimal import Decimal, getcontext
 
 print("hello world")
@@ -113,8 +113,93 @@ class Person:
     def get_years_in_biz(self):
         return self._years_in_biz
 
+    def some_static_method():
+        return "static method"
+
 person1 = Person("Chris", 34, "IT")
 print(person1.name)
 print(person1.get_years_in_biz()) # self is inferred from the object call (refers to person1)
 print(Person.company)
 print(Person.get_years_in_biz(person1)) # need to pass in an object here
+print(Person.some_static_method())
+
+class Dog:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        return "woof"
+
+    def run(self):
+        return "I am running dog"
+
+class Chihuahua(Dog): # inheritance
+    def speak(self):
+        return "yap"
+
+    def move(self):
+        return super().run() # get instance of parent class
+
+dog = Chihuahua("Carlos")
+print(dog.speak())
+print(dog.move())
+
+def excption_handling():
+    start = time.time()
+    try:
+        answer = 2/1
+        print(f"this answer is {answer}")
+    except Exception as e:
+        print(type(e))
+    finally:
+        print(f"this took {time.time() - start} seconds to execute")
+
+excption_handling()
+
+# raise exception
+def raise_error(n):
+    if n == 0:
+        raise Exception()
+    print(n)
+
+try:
+    raise_error(0)
+except Exception as e:
+    print(f"an exception of type {type(e)} occurred")
+
+# custom exception
+class CustomException(Exception):
+    pass
+
+# def cause_error():
+#     raise CustomException("Called cause_error function")
+#
+# cause_error()
+
+# threads
+results = {}
+def long_square(num, results):
+    time.sleep(1)
+    results[num] = num**2
+
+# [long_square(n, results) for n in range(10)]
+
+# create threads
+# t1 = threading.Thread(target=long_square, args=(1, results))
+# t2 = threading.Thread(target=long_square, args=(1, results))
+
+# start threads
+# t1.start()
+# t2.start()
+
+# join threads
+# t1.join()
+# t2.join()
+#
+# print(results)
+
+# typically add to list
+# threads = [threading.Thread(target=long_square(n, results)) for n in range(0, 10)]
+# [t.start() for t in threads]
+# [t.join for t in threads]
+# print(results)
